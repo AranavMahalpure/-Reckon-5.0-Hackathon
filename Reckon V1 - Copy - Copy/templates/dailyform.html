@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Electric Bill Prediction </title>
+    <link rel="stylesheet" type="text/css" href={{url_for('static',filename='form.css')}}>
+</head>
+<style>
+  body {
+      font-family: "Arial", sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidebar a {
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      color: #f1f1f1;
+    }
+
+    .sidebar .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    .openbtn {
+      font-size: 20px;
+      cursor: pointer;
+      background-color: #111;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+    }
+    .openbtn:hover {
+      background-color: #444;
+    }
+    #j1 {
+      width: 100%;
+      margin-left: 2PX;
+    }
+    /* input arrangement */
+    .horizontal-input {
+  display: inline;
+  margin-right: 10px;
+  width: calc(100% / 4);
+}
+.oval-input {
+  border-radius: 20px; /* Adjust the value to your desired radius */
+  padding: 5px;
+}
+</style>
+<body>
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="/">Home</a>
+    <div class="dropdown">
+      <a href="/energy">By Energy Calculation</a>
+      <div class="dropdown-content">
+        <a href="/daily">Daily</a>
+        <a href="/monthly">Monthly</a>
+      </div>
+    </div>
+    <div class="link2">
+      <a href="/weather">By Weather</a>
+    </div>
+  </div>
+
+  <div id="j1"><button class="openbtn" onclick="openNav()">☰</button>
+    <h1 class="large-font" style="text-align: center;
+  margin-top:-30px;">Calculate the Energy On Daily Bases</h1>
+  </div>
+<div class="background-image"></div>
+<form method="post" action="/Daily_Bill">
+  <div id="appliance-form">
+    <div class="category">
+      <h2>Kitchen Appliances</h2>
+      <ul>
+        <li>
+          <label for "appliance1">Microwave:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance1" min="0" value="0">
+        </li>
+        <li>
+          <label for "appliance2">Oven:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance2" min="0" value="0">
+        </li>
+        <li>
+          <label for "appliance3">Dishwasher:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance3" min="0" value="0">
+        </li>
+        <li>
+          <label for "appliance4">Hand Mixer:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance4" min="0" value="0">
+        </li>
+        <!-- Add more appliances as needed -->
+      </ul>
+    </div>
+    <div class="category">
+      <h2>Laundry Room Appliances</h2>
+      <ul>
+        <li>
+          <label for "appliance5">Electricwaterheater:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance5" min="0" value="0">
+        </li>
+        <li>
+          <label for "appliance6">Washing-machine:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance6" min="0" value="0">
+        </li>
+        <li>
+          <label for "appliance7">Tumble-drier:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance7" min="0" value="0">
+        </li>
+        <li>
+          <label for "appliance8">Refrigerator:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance8" min="0" value="0">
+        </li>
+        <!-- Add more appliances as needed -->
+      </ul>
+    </div>
+    <div class="category">
+      <h2>Living Room Appliances</h2>
+      <ul>
+        <li>
+          <label for "appliance9">Light:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance9" min="0" value="0">
+        </li>
+        <li>
+          <label for "appliance10">Airconditioner:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance10" min="0" value="0">
+        </li>
+        <li>
+          <label for "appliance11">Fan:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance11" min="0" value="0">
+        </li>
+        <li>
+          <label for "appliance12">Television:</label>
+          <input type="number" class="horizontal-input oval-input" name="appliance12" min="0" value="0">
+        </li>
+        <!-- Add more appliances as needed -->
+      </ul>
+    </div><div style="text-align:center;"><button class="button1"
+      type="submit">
+        Submit
+      </button>
+  </div>
+</form>
+  <script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+    }
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+    }
+    // Additional JavaScript for dropdown functionality
+    document.addEventListener("DOMContentLoaded", function () {
+      var dropdowns = document.getElementsByClassName("dropdown");
+      for (var i = 0; i < dropdowns.length; i++) {
+        dropdowns[i].addEventListener("mouseover", function () {
+          this.getElementsByClassName("dropdown-content")[0].style.display = "block";
+        });
+        dropdowns[i].addEventListener("mouseout", function () {
+          this.getElementsByClassName("dropdown-content")[0].style.display = "none";
+
+        });
+      }
+    });
+      </script>
+</body>
+</html>
